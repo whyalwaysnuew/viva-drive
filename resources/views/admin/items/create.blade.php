@@ -33,7 +33,7 @@
                     </div>
                 @endif
 
-                <form action="{{ route('admin.items.store') }}" class="w-full" method="POST" encitem="multipart/form-data">
+                <form action="{{ route('admin.items.store') }}" class="w-full" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="bg-white rounded py-10 px-7">
@@ -104,7 +104,7 @@
                                 <label for="grid-last-photos" class="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase">
                                     Photos
                                 </label>
-                                <input multiple accept="image/png, image/jpeg, image/jpg, image/webp" value="{{ old('photos') }}" type="file" placeholder="e.g. Autodrive" name="photos[]" id="grid-last-photos" class="block w-full leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white focus:border-gray-500">
+                                <input multiple accept="image/png, image/jpeg, image/jpg, image/webp" type="file" placeholder="e.g. Autodrive" name="photos[]" id="grid-last-photos" class="block w-full leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded focus:outline-none focus:bg-white focus:border-gray-500">
                                 <div class="mt-2 text-sm text-gray-500">
                                     Photo items. Upload more than 1.
                                 </div>
@@ -146,7 +146,7 @@
                                 <a href="#!" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2" onclick="window.history.go(-1); return false;">
                                     Back
                                 </a>
-                                <button item="submit" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700">
+                                <button type="submit" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700">
                                     Submit
                                 </button>
                             </div>

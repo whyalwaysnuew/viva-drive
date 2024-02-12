@@ -21,6 +21,9 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.1/css/select.dataTables.min.css">
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
+  {{-- Added Libraries --}}
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
   <!-- Scripts -->
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
