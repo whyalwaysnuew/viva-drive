@@ -95,27 +95,35 @@ document.addEventListener("alpine:init", () => {
 		isDateFrom(date) {
 			const d = new Date(this.year, this.month, date);
 
-			if (!this.dateFrom) {
-				return false;
+			if (this.isPast(date) === false) {
+				if (!this.dateFrom) {
+					return false;
+				}
+				return d.getTime() === this.dateFrom.getTime();
 			}
-
-			return d.getTime() === this.dateFrom.getTime();
 		},
 
 		isDateTo(date) {
 			const d = new Date(this.year, this.month, date);
 
-			if (!this.dateTo) {
-				return false;
+			if (this.isPast(date) === false) {
+				if (!this.dateTo) {
+					return false;
+				}
+				return d.getTime() === this.dateTo.getTime();
 			}
-
-			return d.getTime() === this.dateTo.getTime();
 		},
 
 		isInRange(date) {
 			const d = new Date(this.year, this.month, date);
 
-			return d > this.dateFrom && d < this.dateTo;
+			if (this.isPast(date) === false) return d > this.dateFrom && d < this.dateTo;
+		},
+
+		isPast(date) {
+			const d = new Date(this.year, this.month, date);
+			const todayDate = new Date();
+			return d.getDate() < todayDate.getDate() && todayDate.getMonth() === this.month
 		},
 
 		outputDateValues() {
@@ -145,34 +153,37 @@ document.addEventListener("alpine:init", () => {
 			if (temp && !this.selecting) {
 				return;
 			}
-			let selectedDate = new Date(this.year, this.month, date);
-			if (this.endToShow === "from") {
-				this.dateFrom = selectedDate;
-				if (!this.dateTo) {
-					this.dateTo = selectedDate;
-				} else if (selectedDate > this.dateTo) {
-					this.endToShow = "to";
-					this.dateFrom = this.dateTo;
-					this.dateTo = selectedDate;
-				}
-			} else if (this.endToShow === "to") {
-				this.dateTo = selectedDate;
-				if (!this.dateFrom) {
-					this.dateFrom = selectedDate;
-				} else if (selectedDate < this.dateFrom) {
-					this.endToShow = "from";
-					this.dateTo = this.dateFrom;
-					this.dateFrom = selectedDate;
-				}
-			}
-			this.setDateValues();
 
-			if (!temp) {
-				if (this.selecting) {
-					this.outputDateValues();
-					this.closeDatepicker();
+			if (this.isPast(date) === false) {
+				let selectedDate = new Date(this.year, this.month, date);
+				if (this.endToShow === "from") {
+					this.dateFrom = selectedDate;
+					if (!this.dateTo) {
+						this.dateTo = selectedDate;
+					} else if (selectedDate > this.dateTo) {
+						this.endToShow = "to";
+						this.dateFrom = this.dateTo;
+						this.dateTo = selectedDate;
+					}
+				} else if (this.endToShow === "to") {
+					this.dateTo = selectedDate;
+					if (!this.dateFrom) {
+						this.dateFrom = selectedDate;
+					} else if (selectedDate < this.dateFrom) {
+						this.endToShow = "from";
+						this.dateTo = this.dateFrom;
+						this.dateFrom = selectedDate;
+					}
 				}
-				this.selecting = !this.selecting;
+				this.setDateValues();
+
+				if (!temp) {
+					if (this.selecting) {
+						this.outputDateValues();
+						this.closeDatepicker();
+					}
+					this.selecting = !this.selecting;
+				}
 			}
 		},
 
